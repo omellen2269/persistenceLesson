@@ -10,11 +10,32 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
+    
+    @IBOutlet weak var counterLabel: UILabel!
+    var counter = 0
+    
+    let userDefaults = UserDefaults.standard
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        counter = userDefaults.integer(forKey: "counterKey")
+        counterLabel.text = "\(counter)"
     }
 
-
+    @IBAction func whenPressed(_ sender: Any)
+    {
+        counter += 1
+        counterLabel.text = "\(counter)"
+        userDefaults.set(counter, forKey: "counterKey")
+    }
+ 
+    @IBAction func reset(_ sender: Any)
+    {
+        counter = 0
+        counterLabel.text = "\(counter)"
+    }
+    
+    
 }
 
